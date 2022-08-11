@@ -16,22 +16,27 @@
       };
     };
 
+    const quantityBallsALL = (x) => {
+      if (x > 10) {
+        return 10;
+      } else if (x < 0) {
+        return 0;
+      } else {
+        return x;
+      }
+    };
+
     return function start() {
 
       const userDateTransform = (string) => {
         switch (true) {
           case (string === null):
-            exit();
-            break;
-          case (string === NaN):
-            start();
-            break;
-          case (string === ''):
-            start();
-            break;
-          case (string > 5 || string <= 0):
-            start();
-            break;
+            return exit();
+          case (string === NaN || string === '' || string > 5 || string <= 0):
+            return start();
+          case (string > quantityBalls.player):
+            alert(values.playerManyBalls);
+            return start();
           default:
             return +string;
         };
@@ -75,20 +80,17 @@
           return;
         } else {
           switch (true) {
-            case (quantityBalls.player < newUserData):
-              alert(values.playerManyBalls);
-              return start();
             case (a % 2 === 0 && b % 2 !== 0 || a % 2 !== 0 && b % 2 === 0):
               quantityBalls.player += a;
               quantityBalls.computer -= a;
-              alert(values.playerWinBalls + values.playerRemains + `${quantityBalls.player}\n` +
-                values.compRemains + `${quantityBalls.computer}`);
+              alert(values.playerWinBalls + values.playerRemains + `${quantityBallsALL(quantityBalls.player)}\n` +
+                values.compRemains + `${quantityBallsALL(newUserData)}`);
               return checkingRemainingBalls();
             default:
               quantityBalls.player -= a;
               quantityBalls.computer += a;
-              alert(values.compWinBalls + values.playerRemains + `${quantityBalls.player}\n` +
-                values.compRemains + `${quantityBalls.computer}`);
+              alert(values.compWinBalls + values.playerRemains + `${quantityBallsALL(quantityBalls.player)}\n` +
+                values.compRemains + `${quantityBallsALL(quantityBalls.computer)}`);
               return checkingRemainingBalls();
           }
 

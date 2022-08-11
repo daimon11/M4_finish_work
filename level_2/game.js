@@ -25,27 +25,13 @@
 
       const quantityBallsALL = (x) => {
         if (x > 10) {
-          return x = 10;
+          return 10;
         } else if (x < 0) {
-          return x = 0;
+          return 0;
         } else {
           return x;
         }
       };
-
-      const inputUserData = () => {
-        const data = prompt('Ваша ставка: ', '');
-        switch (true) {
-          case (data === null):
-            return exit();
-          case (isNaN(data) || data === NaN || data === '' ||
-            data > quantityBalls.player || data <= 0):
-            return inputUserData();
-          default:
-            return +data;
-        };
-      };
-      const newUserData = inputUserData();
 
       const values = {
         compEvenNumber: 'Бот загадал число, оно четное?',
@@ -61,6 +47,21 @@
         compDataNum: `Бот загадывал число `,
       };
 
+      const inputUserData = () => {
+        const data = prompt('Ваша ставка: ', '');
+        switch (true) {
+          case (data === null):
+            return exit();
+          case (isNaN(data) || data === NaN || data === '' || data <= 0):
+            return inputUserData();
+          case (data > quantityBalls.player):
+            alert(values.playerManyBalls);
+            return inputUserData();
+          default:
+            return +data;
+        };
+      };
+      const newUserData = inputUserData();
 
       const evenOdd = Math.round(Math.random());
       console.log('Бот загадал ' + evenOdd + ' Примечание: (если 1 - неченое, если 0 - четное)');
@@ -113,9 +114,6 @@
           return;
         } else {
           switch (true) {
-            case (quantityBalls.player < newUserData):
-              alert(values.playerManyBalls);
-              return start();
             case (a % 2 === 0 && b % 2 !== 0 || a % 2 !== 0 && b % 2 === 0):
               quantityBalls.player += a;
               quantityBalls.computer -= a;

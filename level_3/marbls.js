@@ -47,9 +47,9 @@
 
       const quantityBallsALL = (x) => {
         if (x > 10) {
-          return x = 10;
+          return 10;
         } else if (x < 0) {
-          return x = 0;
+          return 0;
         } else {
           return x;
         }
@@ -120,8 +120,10 @@
           switch (true) {
             case (data === null):
               return exit();
-            case (isNaN(data) || data === NaN || data === '' ||
-              data > quantityBalls.player || data <= 0):
+            case (isNaN(data) || data === NaN || data === '' || data <= 0):
+              return inputUserData();
+            case (data > quantityBalls.player):
+              alert(values.playerManyBalls)
               return inputUserData();
             default:
               return +data;
@@ -134,9 +136,6 @@
           return;
         } else {
           switch (true) {
-            case (quantityBalls.player < newUserData):
-              alert(values.playerManyBalls);
-              return start();
             case (newUserData % 2 === 0 && evenOdd % 2 !== 0 ||
               newUserData % 2 !== 0 && evenOdd % 2 === 0):
               quantityBalls.player += newUserData;
